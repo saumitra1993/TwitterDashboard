@@ -1,0 +1,22 @@
+{
+  "name": "twitterdashboard",
+  "version": "1.0.0",
+  "description": "Twitter dashboard to see user's most popular users, and topics",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Saumitra",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "connect-redis": "^3.2.0",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.5",
+    "express": "^4.14.1",
+    "express-session": "^1.15.0",
+    "flutter": "0.0.5",
+    "node-sass-middleware": "^0.11.0",
+    "redis": "^2.6.5"
+  }
+}
