@@ -1,4 +1,4 @@
-angular.module("twdashboard").controller("dashboardController", function($scope,appfactory,$q,$routeParams, $moment){
+angular.module("twdashboard").controller("dashboardController", function($scope,appfactory,$q,$routeParams,$uibModal, $moment){
     
     var used_hashtags = {};
     $scope.showLoader = true;
@@ -49,6 +49,25 @@ angular.module("twdashboard").controller("dashboardController", function($scope,
     
     $scope.getFormattedUnit = function(unit){
         return $moment(unit).format('h a') + " - " + moment(unit).add($scope.unitDuration, 'hours').format('h a');  
+    };
+    
+    $scope.showTweetsWithTopic = function(topic){
+        var tweets = used_hashtags[topic];
+        $uibModal.open({
+          animation:false,
+          ariaLabelledBy: 'modal-title',
+          ariaDescribedBy: 'modal-body',
+          templateUrl: 'templates/showTweetsModal.html',
+          controller: 'modalInstanceController',
+          resolve: {
+            tweets: function () {
+              return tweets;
+            },
+            topic: function(){
+                return topic;
+            }
+          }
+        });
     };
     
     function processData(data){
