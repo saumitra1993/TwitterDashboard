@@ -7,3 +7,45 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center; }
+
+.dashboard {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.loader {
+  text-align: center; }
+
+.displayer {
+  height: 100%;
+  width: 100%;
+  text-align: center; }
+
+.visual-info {
+  height: 100%;
+  width: 100%;
+  border: 1px solid #181818;
+  padding: 5%;
+  margin-top: 2%; }
+  .visual-info tbody tr {
+    width: 100%; }
+  .visual-info tbody td:first-child {
+    width: 10%; }
+  .visual-info tbody td {
+    padding: 3%;
+    overflow-x: auto;
+    border: 1px solid #181818;
+    text-align: center; }
+    .visual-info tbody td span {
+      background-color: #eee;
+      min-width: 10%;
+      height: 2%;
+      margin: 1%;
+      padding: 1%;
+      cursor: pointer; }
+    .visual-info tbody td span:hover {
+      background-color: #bbbbbb; }
+  .visual-info tfoot td {
+    padding: 2%; }

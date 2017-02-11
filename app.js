@@ -14,7 +14,7 @@ var secret;
 var flutter = new Flutter({
   consumerKey: 'BMWdpobothenelY8as7eIXmHN',
   consumerSecret: 'ZKFHzk0NBOhcv4F4zH2VXku7zEUTFU8zcRfqFF5xix1EqDgLyu',
-  loginCallback: 'https://c0d57269.ngrok.io/twitter/callback',
+  loginCallback: 'http://localhost:3000/twitter/callback',
   debug: function(msg){
       console.log(msg);
   },

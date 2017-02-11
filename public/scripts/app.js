@@ -1,4 +1,4 @@
-angular.module('twdashboard', ['ngRoute','ui.bootstrap','ngAnimate'])
+angular.module('twdashboard', ['ngRoute','ui.bootstrap','ngAnimate','angular-momentjs'])
 .config(function($locationProvider,$routeProvider){
     
     $routeProvider

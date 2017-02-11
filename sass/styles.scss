@@ -9,3 +9,63 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.dashboard {
+    min-height:80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader {
+    text-align: center;
+}
+
+.displayer {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+
+.visual-info {
+    height:100%;
+    width:100%;
+    border: 1px solid #181818;
+    padding:5%;
+    margin-top: 2%;
+    
+    tbody {
+        tr {
+            width: 100%;
+        }
+        td:first-child {
+            width:10%;
+        }
+        td {
+            padding:3%;
+            overflow-x: auto;
+            border: 1px solid #181818;
+            text-align: center;
+            span {
+                background-color: #eee;
+                min-width: 10%;
+                height: 2%;
+                margin: 1%;
+                padding: 1%;
+                cursor: pointer;
+            }
+            span:hover {
+                background-color: darken(#eee,20%);
+            }
+        }
+    
+    }
+    
+    tfoot {
+        td {
+            padding: 2%;
+        }
+    }
+    
+}
