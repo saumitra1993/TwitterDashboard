@@ -13,7 +13,7 @@
             <tbody>
                 <tr ng-repeat="unit in units track by $index">
                     <td>{{getFormattedUnit(unit)}}</td>
-                    <td ><span ng-repeat="(topic, volume) in getTopicThisUnit(unit, unitDuration)">{{topic}}</span></td>
+                    <td ><div uib-popover="Tweets : {{volume}}" popover-append-to-body = "true" popover-trigger="'mouseenter'" color-topic="{{volume}}" ng-repeat="(topic, volume) in getTopicThisUnit(unit, unitDuration)">{{topic}}</div></td>
                 </tr>
             </tbody>
 <!--

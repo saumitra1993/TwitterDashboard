@@ -4,6 +4,9 @@ angular.module("twdashboard").controller("dashboardController", function($scope,
     $scope.showLoader = true;
     $scope.fetchMoreText = "Fetch older";
     
+    $scope.activeColor = '#f48000';
+    $scope.highestVolume = 0;
+    
     appfactory.screen_name = $routeParams.screen_name;
     
     appfactory.getHomeTimeline().then(processData);
@@ -13,9 +16,8 @@ angular.module("twdashboard").controller("dashboardController", function($scope,
         appfactory.getHomeTimeline().then(processData);
     };
     
-    $scope.units = appfactory.hours;           //Unit determines the granularity of table
+    $scope.units = [];     //Unit determines the granularity of table
     
-    console.log($scope.units);
     $scope.unitDuration = 1;                   // in hours
     
     $scope.getTopicThisUnit = function(unit, duration){
@@ -46,16 +48,24 @@ angular.module("twdashboard").controller("dashboardController", function($scope,
     };
     
     $scope.getFormattedUnit = function(unit){
-        return $moment(unit).format('h a');  
+        return $moment(unit).format('h a') + " - " + moment(unit).add($scope.unitDuration, 'hours').format('h a');  
     };
     
     function processData(data){
         console.log(data);
-        $scope.last_tweet_datetime = $moment(data[data.length - 1].created_at, "ddd MMM DD HH:mm:ss Z YYYY");
+        $scope.last_tweet_datetime = moment(data[data.length - 1].created_at, "ddd MMM DD HH:mm:ss Z YYYY");
         console.log($scope.last_tweet_datetime);
+        
+        var now = moment();
+        $scope.units = appfactory.getHourMarks($scope.unitDuration, $scope.last_tweet_datetime, now);
+        
+        if($scope.units.length > 8){
+            $scope.unitDuration *= 2;
+            $scope.units = appfactory.getHourMarks($scope.unitDuration, $scope.last_tweet_datetime, now);
+        }
+        
         $scope.last_tweet_datetime = $scope.last_tweet_datetime.format("dddd, MMM Do, h:mm a");
         
-        console.log($scope.last_tweet_datetime);
         for(var i = 0;i < data.length;i++){
             var tweet = data[i];
             var entities = tweet.entities;
@@ -71,6 +81,15 @@ angular.module("twdashboard").controller("dashboardController", function($scope,
                 });
             }
         }
+        for (var hashtag in used_hashtags) {
+          if (used_hashtags.hasOwnProperty(hashtag)) {
+              var tweets = used_hashtags[hashtag];
+              if(tweets.length > $scope.highestVolume){
+                $scope.highestVolume = tweets.length;
+              }
+          }
+        }
+        
         $scope.showLoader = false;
         $scope.fetchMoreText = "Fetch older";
         console.log(used_hashtags);
