@@ -6,7 +6,6 @@ var path = require('path');
 var redis   = require("redis");
 var redisStore = require('connect-redis')(session);
 var client  = redis.createClient();
-var sassMiddleware = require('node-sass-middleware');
 var Flutter = require('flutter');
 var access_token;
 var secret;
@@ -14,7 +13,7 @@ var secret;
 var flutter = new Flutter({
   consumerKey: 'BMWdpobothenelY8as7eIXmHN',
   consumerSecret: 'ZKFHzk0NBOhcv4F4zH2VXku7zEUTFU8zcRfqFF5xix1EqDgLyu',
-  loginCallback: 'https://ca81f5b1.ngrok.io/twitter/callback',
+  loginCallback: 'https://6e37c6c0.ngrok.io/twitter/callback',
   debug: function(msg){
       console.log(msg);
   },
@@ -62,13 +61,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-app.use(sassMiddleware({
-     src: __dirname + '/sass', 
-     dest: __dirname + '/public/stylesheets',
-     prefix:  '/stylesheets',
-     debug: true,         
- })
-);  
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', function (req, res) {
