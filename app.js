@@ -13,7 +13,7 @@ var secret;
 var flutter = new Flutter({
   consumerKey: 'BMWdpobothenelY8as7eIXmHN',
   consumerSecret: 'ZKFHzk0NBOhcv4F4zH2VXku7zEUTFU8zcRfqFF5xix1EqDgLyu',
-  loginCallback: 'https://6e37c6c0.ngrok.io/twitter/callback',
+  loginCallback: 'https://3740502c.ngrok.io/twitter/callback',
   debug: function(msg){
       console.log(msg);
   },
@@ -34,7 +34,7 @@ var flutter = new Flutter({
     // Store away oauth credentials here
 
     // Redirect user back to your app
-    res.redirect('/#!/dashboard/'+req.results.screen_name);
+    res.redirect('/dashboard/'+req.results.screen_name);
   }
 });
 
@@ -46,7 +46,7 @@ app.use(session({
   secret: 'keyboard cat',
   resave: false,
   store: new redisStore({ host: 'localhost', port: 6379, client: client,ttl :  260}),
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: {
     path    : '/',
     httpOnly: false,
@@ -63,8 +63,10 @@ app.use(bodyParser.json())
 
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+
 app.get('/', function (req, res) {
-  res.render('index');
+  res.sendFile(path.join(__dirname + '/index.html'));
 });
 
 app.get('/twitter/connect', flutter.connect);
